@@ -1,6 +1,7 @@
 ﻿
 // Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
+open System
 
 type Size = | Small | Medium | Large 
 type Food = | Cake | Salad | Sandwich
@@ -18,3 +19,32 @@ let getFoodPrice pr =
     | Cake -> 30.0  * sizeRP pr.size
     | Salad -> 20.0 * sizeRP pr.size 
     | Sandwich -> 25.0 * sizeRP pr.size
+
+let getTypeFromString smth = 
+    match smth with 
+    |"cake" -> Cake
+    |"salad" -> Salad
+    |"sandwich" -> Sandwich
+
+let getSizeFromSring smth = 
+    match smth with 
+    |"small" -> Small
+    |"medum" -> Medium
+    |"large" -> Large
+
+let getPriceForOption fType fSize =
+    let a = getTypeFromString fType
+    let b = getSizeFromSring fSize
+    let c = {name=a; size=b}
+    getFoodPrice c
+
+[<EntryPoint>]
+let main args= 
+    printf("Enter the name of the food: options are salad/sandwich/cake \n")
+    let foodtype = System.Console.ReadLine();
+    printf("Enter the size of the food: options are small/medium/large \n")
+    let foodsize= System.Console.ReadLine();
+    let x = getPriceForOption foodtype foodsize
+    Console.WriteLine("Price is {0}", x)
+    Console.ReadLine()
+    0
