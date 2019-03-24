@@ -2,6 +2,10 @@
 // Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
 
+type Size = | Small | Medium | Large 
+type Food = | Cake | Salad | Sandwich
+type Product = | Cake of Size | Salad of Size | Sandwich of Size
+
 let calc_price food_type size = 
     match food_type with 
     |"salad" -> 30 * sizeRP size
