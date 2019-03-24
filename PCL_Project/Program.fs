@@ -34,16 +34,16 @@ let getSizeFromSring smth =
 
 let getPriceForOption fType fSize =
     let a = getTypeFromString fType
-    let b = getSizeFromSring fSize
+    let b = getSizeFromSring fSize 
     let c = {name=a; size=b}
     getFoodPrice c
 
 [<EntryPoint>]
 let main args= 
     printf("Enter the name of the food: options are salad/sandwich/cake \n")
-    let foodtype = System.Console.ReadLine();
+    let foodtype = Console.ReadLine();
     printf("Enter the size of the food: options are small/medium/large \n")
-    let foodsize= System.Console.ReadLine();
+    let foodsize= Console.ReadLine();
     let x = getPriceForOption foodtype foodsize
     Console.WriteLine("Price is {0}", x)
     Console.ReadLine()
