@@ -4,28 +4,17 @@
 
 type Size = | Small | Medium | Large 
 type Food = | Cake | Salad | Sandwich
-type Product = | Cake of Size | Salad of Size | Sandwich of Size
-
-let calc_price food_type size = 
-    match food_type with 
-    |"salad" -> 30 * sizeRP size
-    |"sandwich" -> 25* sizeRP size
-    |"cake" -> 20 * sizeRP size
-    |_ -> 0
-
-
-
+type Product = { name: Food; size: Size}
 
 let sizeRP size= 
     match size with
-    |"small" -> 0.5
-    |"medium" -> 1.0
-    |"large" -> 1.5
+    |Small-> 0.5
+    |Medium -> 1.0
+    |Large -> 1.5
     |_ -> 1.0
-
-
-
-[<EntryPoint>]
-let main argv = 
-    printfn "%A" argv
-    0 // return an integer exit code
+         
+let getFoodPrice pr = 
+    match pr.name with 
+    | Cake -> 30.0  * sizeRP pr.size
+    | Salad -> 20.0 * sizeRP pr.size 
+    | Sandwich -> 25.0 * sizeRP pr.size
