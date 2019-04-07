@@ -1,5 +1,4 @@
-﻿
-open System
+﻿open System
 
 type Size = | Small | Medium | Large 
 type FoodType = | Cake | Salad | Sandwich
@@ -26,13 +25,13 @@ let getFoodPrice pr =
 
 //OBSOLETE:: NOT REQUIRED
 let getTypeFromString smth = 
-    match smth with 
+    match smth.ToString().ToLower() with 
     |"cake" -> Cake
     |"salad" -> Salad
     |"sandwich" -> Sandwich
 
 let getSizeFromSring smth = 
-    match smth with 
+    match smth.ToString().ToLower() with 
     |"small" -> Small
     |"medium" -> Medium
     |"large" -> Large
