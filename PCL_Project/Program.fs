@@ -1,8 +1,12 @@
 ﻿open System
 
 type Size = | Small | Medium | Large 
-type FoodType = | Cake | Salad | Sandwich
-type Product = {name: string; foodType: FoodType; size: Size}
+type SaladType = | Carrot | Potato | Caesar
+type CakeType = | Chocolate | Banana | Strawberry
+type SandwichType = | Ham | Beef | Chicken
+type FoodType = | SaladType | CakeType | SandwichType
+type Product = {foodType: FoodType; size: Size}
+type AllFood = | ViaSalad of Product | ViaCake of Product | ViaSandwich of Product
 
 
 
