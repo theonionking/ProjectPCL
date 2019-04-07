@@ -2,8 +2,10 @@
 open System
 
 type Size = | Small | Medium | Large 
-type Food = | Cake | Salad | Sandwich
-type Product = {name: Food; size: Size}
+type FoodType = | Cake | Salad | Sandwich
+type Product = {name: string; foodType: FoodType; size: Size}
+
+
 
 let sizeRP size= 
     match size with
@@ -13,11 +15,16 @@ let sizeRP size=
     |_ -> 1.0
          
 let getFoodPrice pr = 
-    match pr.name with 
+    match pr.foodType with 
     | Cake -> 30.0  * sizeRP pr.size
     | Salad -> 20.0 * sizeRP pr.size 
     | Sandwich -> 25.0 * sizeRP pr.size
 
+
+
+
+
+//OBSOLETE:: NOT REQUIRED
 let getTypeFromString smth = 
     match smth with 
     |"cake" -> Cake
