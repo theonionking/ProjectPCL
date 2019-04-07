@@ -1,5 +1,4 @@
-﻿open System
-
+﻿
 type Size = | Small | Medium | Large 
 
 type SaladType = | Carrot | Potato | Caesar
@@ -19,6 +18,7 @@ let sizeRP size=
     | Medium -> 1.0
     | Large -> 1.5         
 
+
 let getFoodPrice food = 
     match food with 
     | ViaSalad details -> 
@@ -36,3 +36,36 @@ let getFoodPrice food =
         | Ham -> 30.0 * sizeRP details.Size
         | Beef -> 30.0 * sizeRP details.Size
         | Chicken -> 25.0 * sizeRP details.Size
+
+
+let getStrRep food = 
+    match food with 
+    | ViaSalad details -> sprintf "ViaSalad %A" details.Food
+    | ViaCake details -> sprintf "ViaCake %A" details.Food
+    | ViaSandwich details -> sprintf "ViaSandwich %A" details.Food
+
+
+type CanteenMessage = | OrderFood of AllFood * int 
+                      | LeaveAComment of string
+
+
+let canteenFoodAgent = MailboxProcessor<CanteenMessage>.Start(fun inbox-> 
+
+    // the message processing function
+    let rec messageLoop() = async{
+        
+        // read a message
+        let! msg = inbox.Receive()
+        
+        // process a message
+        match msg with
+        | OrderFood (food, qty) -> printfn "Please pay DKK%.1f for your order of %d %s. Thanks!" ((getFoodPrice food)*(float qty)) qty (getStrRep food)
+        | LeaveAComment comment -> printfn "Thank you very much for your comment. Our canteen operators will look into it soon! Have a good day!\nYour comment was: \"%s\"" comment
+
+        // loop to top
+        return! messageLoop()  
+        }
+
+    // start the loop 
+    messageLoop() 
+    )
